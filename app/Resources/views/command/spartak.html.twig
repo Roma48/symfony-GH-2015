@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Spartak</h1>
+            </div>
+
+            <table width="100%" style="text-align: center">
+                <thead style="background: aqua">
+                <th>#</th>
+                <th>Name</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="/player/1">Alex Moshta</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="/player/2">Yuriy Tarnavskiy</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="/player/3">Sergey Polischuk</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

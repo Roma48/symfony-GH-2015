@@ -3,30 +3,27 @@
  * Created by PhpStorm.
  * User: romapaliy
  * Date: 11/18/15
- * Time: 3:15 PM
+ * Time: 3:39 PM
  */
 
 namespace AppBundle\Controller;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class CommandController
+ * Class TrainerController
  * @package AppBundle\Controller
- *
  */
-class CommandController extends Controller
+class TrainerController extends Controller
 {
     /**
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("command/{name}", name="Command")
+     * @Route("trainer/{name}", name="Trainer", requirements={"name" = "\w+\D+"})
      */
-    public function CommandAction($name)
+    public function TrainerController($name)
     {
-        return $this->render(":command:$name.html.twig");
+        return $this->render(":trainer:$name.html.twig");
     }
-
 }
