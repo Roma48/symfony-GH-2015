@@ -22,7 +22,7 @@ class CommandController extends Controller
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("command/{name}", name="Command")
+     * @Route("command/{name}", name="Command", requirements={"name" = "\D+"})
      */
     public function CommandAction($name)
     {

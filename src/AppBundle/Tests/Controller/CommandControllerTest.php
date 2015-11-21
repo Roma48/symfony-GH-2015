@@ -4,15 +4,15 @@ namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CommandControllerTest extends WebTestCase
+class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/command/dynamo');
+        $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Dynamo', $crawler->filter('#welcome h1')->text());
+        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
     }
 }

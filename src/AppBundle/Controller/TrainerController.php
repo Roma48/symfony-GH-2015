@@ -20,7 +20,7 @@ class TrainerController extends Controller
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("trainer/{name}", name="Trainer", requirements={"name" = "\w+\D+"})
+     * @Route("trainer/{name}", name="Trainer", requirements={"name" = "\D+"})
      */
     public function TrainerController($name)
     {

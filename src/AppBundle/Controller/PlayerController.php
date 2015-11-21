@@ -22,7 +22,7 @@ class PlayerController extends Controller
      * @param $playerId
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("player/{playerId}", name="Player")
+     * @Route("player/{playerId}", name="Player", requirements={"playerId" = "\d+"} )
      */
     public function PlayerAction ($playerId)
     {
