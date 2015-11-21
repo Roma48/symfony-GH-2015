@@ -2,31 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: romapaliy
- * Date: 11/18/15
- * Time: 3:15 PM
+ * Date: 11/20/15
+ * Time: 11:17 AM
  */
 
 namespace AppBundle\Controller;
+
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class CommandController
+ * Class PlayerController
  * @package AppBundle\Controller
- *
  */
-class CommandController extends Controller
+class PlayerController extends Controller
 {
     /**
-     * @param $name
+     * @param $playerId
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("command/{name}", name="Command", requirements={"name" = "\D+"})
+     * @Route("player/{playerId}", name="Player", requirements={"playerId" = "\d+"} )
      */
-    public function CommandAction($name)
+    public function PlayerAction ($playerId)
     {
-        return $this->render(":command:$name.html.twig");
+        return $this->render(":player:player-$playerId.html.twig");
     }
-
 }
