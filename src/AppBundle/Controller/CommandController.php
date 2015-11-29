@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
 /**
  * Class CommandController
  * @package AppBundle\Controller
@@ -21,12 +22,11 @@ class CommandController extends Controller
     /**
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @Route("command/{name}", name="Command", requirements={"name" = "\D+"})
      */
     public function CommandAction($name)
     {
-        return $this->render(":command:$name.html.twig");
+        return $this->render("command/index.html.twig", ['name' => $name]);
     }
 
 }
