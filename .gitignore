@@ -9,5 +9,5 @@
 /composer.phar
 /vendor/
 /web/bundles/
-/web-src/bower_components
-/web-src/node_modules
+/web-src/bower_components/
+/web-src/node_modules/
