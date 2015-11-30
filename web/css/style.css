@@ -6547,3 +6547,32 @@ button.close {
     display: none !important;
   }
 }
+body {
+  background: #eff2f7;
+}
+#header {
+  background: #009900 url("../images/header.jpg") no-repeat center center;
+  height: 400px;
+  padding-top: 50px;
+}
+#header .active a {
+  background: green;
+  border: 1px solid white;
+}
+#content {
+  padding: 50px 0 ;
+}
+#content .container {
+  background: white;
+}
+#content .container h1 {
+  text-align: center;
+}
+#content .container img {
+  display: block;
+  margin: 20px auto;
+}
+#footer {
+  background: #326295;
+  height: 200px;
+}

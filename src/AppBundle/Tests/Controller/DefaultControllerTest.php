@@ -13,6 +13,6 @@ class CommandControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/command/dynamo');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Dynamo', $crawler->filter('#welcome h1')->text());
+        $this->assertContains('Command', $crawler->filter('#welcome h1')->text());
     }
 }
