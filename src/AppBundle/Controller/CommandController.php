@@ -27,11 +27,17 @@ class CommandController extends Controller
      */
     public function CommandAction($name)
     {
-        $command = Factory::create();
+        $data = Factory::create();
 
-        $name = $command->company();
+        $team = [];
 
-        return $this->render("command/index.html.twig", ['name' => $name]);
+        for ($i = 1; $i < 11; $i++){
+            $team[$i]['id'] = $i;
+            $team[$i]['name'] = $data->name;
+            $team[$i]['age'] = $data->numberBetween(18, 30);
+        }
+
+        return $this->render("command/index.html.twig", ["name" => $name, "team" => $team]);
     }
 
 }
