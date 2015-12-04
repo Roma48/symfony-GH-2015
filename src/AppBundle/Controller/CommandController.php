@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -26,6 +27,10 @@ class CommandController extends Controller
      */
     public function CommandAction($name)
     {
+        $command = Factory::create();
+
+        $name = $command->company();
+
         return $this->render("command/index.html.twig", ['name' => $name]);
     }
 
