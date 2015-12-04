@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: romapaliy
- * Date: 11/20/15
- * Time: 11:17 AM
- */
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
+use AppBundle\Entity\Team;
+use AppBundle\Entity\Trainer;
 use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,17 +26,27 @@ class GenerateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($entity_name == "player"){
-            $players = $this->generatePlayers($count);
+        $entity_collection = [];
 
-            foreach ($players as $player){
-                $em->persist($player);
-            }
+        if ($entity_name == "player"){
+            $entity_collection = $this->generatePlayers($count);
+        } else if ($entity_name == "team"){
+            $entity_collection = $this->generateTeam($count);
+        } else if ($entity_name == "trainer"){
+            $entity_collection = $this->generateTrainer($count);
         }
 
-        $em->flush();
+        if ($entity_collection){
+            foreach ($entity_collection as $entity){
+                $em->persist($entity);
+            }
 
-        return new Response('Created ' .$count . ' players!');
+            $em->flush();
+
+            return new Response('Created ' .$count . ' ' . $entity_name . 's!');
+        } else {
+            return new Response('Not found this entity!');
+        }
     }
 
     /**
@@ -63,5 +69,48 @@ class GenerateController extends Controller
         }
 
         return $players;
+    }
+
+    /**
+     * @param $count
+     * @return array
+     */
+    public function generateTrainer($count)
+    {
+        $data = Factory::create();
+
+        $trainers = [];
+
+        for ($i = 1; $i < $count + 1; $i++){
+            $trainer = new Trainer();
+            $trainer->setAge($data->numberBetween(40, 60));
+            $trainer->setCountry($data->country);
+            $trainer->setName($data->name);
+
+            $trainers[$i] = $trainer;
+        }
+
+        return $trainers;
+    }
+
+    /**
+     * @param $count
+     * @return array
+     */
+    public function generateTeam($count)
+    {
+        $data = Factory::create();
+
+        $teams = [];
+
+        for ($i = 1; $i < $count + 1; $i++){
+            $team = new Team();
+            $team->setCountry($data->country);
+            $team->setName($data->company);
+
+            $teams[$i] = $team;
+        }
+
+        return $teams;
     }
 }
