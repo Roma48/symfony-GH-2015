@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Team;
 
 /**
  * @ORM\Entity()
@@ -19,6 +20,7 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players")
      */
     protected $name;
 
@@ -31,6 +33,11 @@ class Player
      * @ORM\Column(type="string")
      */
     protected $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Team", inversedBy="players", cascade={"persist"})
+     */
+    protected $team;
 
     /**
      * @return mixed
@@ -94,5 +101,23 @@ class Player
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return Player
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Team $team
+     * @return $this
+     */
+    public function setTeam(Team $team)
+    {
+        $this->team = $team;
+        return $this;
     }
 }

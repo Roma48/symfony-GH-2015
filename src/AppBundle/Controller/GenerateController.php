@@ -17,80 +17,64 @@ use Symfony\Component\HttpFoundation\Response;
 class GenerateController extends Controller
 {
     /**
-     * @param $entity_name
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("generate/{entity_name}/{count}", name="Generate", requirements={"entity_name" = "\D+", "count" = "\d+"}, defaults={"count" = 10} )
+     * @Route("generate", name="Generate" )
      */
-    public function GenerateAction ($entity_name, $count)
+    public function GenerateAction ()
     {
-        $em = $this->getDoctrine()->getManager();
-
+        $count = 10;
         $entity_collection = [];
 
-        if ($entity_name == "player"){
-            $entity_collection = $this->generatePlayers($count);
-        } else if ($entity_name == "team"){
+        for($i = 0; $i < $count; $i++){
             $entity_collection = $this->generateTeam($count);
-        } else if ($entity_name == "trainer"){
-            $entity_collection = $this->generateTrainer($count);
         }
 
         if ($entity_collection){
+            $em = $this->getDoctrine()->getManager();
+
             foreach ($entity_collection as $entity){
                 $em->persist($entity);
             }
 
             $em->flush();
 
-            return new Response('Created ' .$count . ' ' . $entity_name . 's!');
+            return new Response('Created Teams');
         } else {
             return new Response('Not found this entity!');
         }
     }
 
     /**
-     * @param $count
-     * @return array
+     * @param Team $team
+     * @return Player
      */
-    public function generatePlayers($count)
+    public function generatePlayer(Team $team)
     {
         $data = Factory::create();
 
-        $players = [];
+        $player = new Player();
+        $player->setAge($data->numberBetween(18, 30));
+        $player->setCountry($data->country);
+        $player->setName($data->name);
+        $player->setTeam($team);
 
-        for ($i = 1; $i < $count + 1; $i++){
-            $player = new Player();
-            $player->setAge($data->numberBetween(18, 30));
-            $player->setCountry($data->country);
-            $player->setName($data->name);
-
-            $players[$i] = $player;
-        }
-
-        return $players;
+        return $player;
     }
 
     /**
-     * @param $count
-     * @return array
+     * @param Team $team
+     * @return Trainer
      */
-    public function generateTrainer($count)
+    public function generateTrainer(Team $team)
     {
         $data = Factory::create();
 
-        $trainers = [];
+        $trainer = new Trainer();
+        $trainer->setAge($data->numberBetween(40, 60));
+        $trainer->setCountry($data->country);
+        $trainer->setName($data->name);
+        $trainer->setTeam($team);
 
-        for ($i = 1; $i < $count + 1; $i++){
-            $trainer = new Trainer();
-            $trainer->setAge($data->numberBetween(40, 60));
-            $trainer->setCountry($data->country);
-            $trainer->setName($data->name);
-
-            $trainers[$i] = $trainer;
-        }
-
-        return $trainers;
+        return $trainer;
     }
 
     /**
@@ -107,6 +91,16 @@ class GenerateController extends Controller
             $team = new Team();
             $team->setCountry($data->country);
             $team->setName($data->company);
+
+            for ($j = 0; $j < 23; $j++){
+                $player = $this->generatePlayer($team);
+                $team->addPlayer($player);
+            }
+
+            for ($k = 0; $k < 7; $k++){
+                $trainer = $this->generateTrainer($team);
+                $team->addTrainer($trainer);
+            }
 
             $teams[$i] = $team;
         }

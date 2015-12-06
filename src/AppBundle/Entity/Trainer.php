@@ -33,6 +33,11 @@ class Trainer
     protected $country;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Team", inversedBy="trainers", cascade={"persist"})
+     */
+    protected $team;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -94,5 +99,23 @@ class Trainer
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return Trainer
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Team $team
+     * @return $this
+     */
+    public function setTeam(Team $team)
+    {
+        $this->team = $team;
+        return $this;
     }
 }
