@@ -27,13 +27,7 @@ class PlayerController extends Controller
      */
     public function PlayerAction ($playerId)
     {
-        $data = Factory::create();
-
-        $player['name'] = $data->company;
-        $player['age'] = $data->numberBetween(18, 30);
-        $player['country'] = $data->country;
-        $player['goals'] = $data->numberBetween(0, 100);
-        $player['photo'] = $data->imageUrl(200, 200, "people");
+        $player = $this->getDoctrine()->getRepository('AppBundle:Player')->findOneById($playerId);
 
         return $this->render(":player:index.html.twig", ["player" => $player]);
     }

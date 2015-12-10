@@ -11,14 +11,15 @@
                 <thead>
                 <th>#</th>
                 <th>Name</th>
-                <th>Total</th>
+                <th>Country</th>
                 </thead>
                 <tbody>
+
                 {% for command in commands %}
                     <tr>
                         <td>{{ command.id }}</td>
-                        <td><a href="/command/{{ command.name }}">{{ command.name }}</a></td>
-                        <td>{{ command.total }}</td>
+                        <td><a href="{{ path('Command', {id: command.id}) }}">{{ command.name }}</a></td>
+                        <td>{{ command.country }}</td>
                     </tr>
                 {% endfor %}
 

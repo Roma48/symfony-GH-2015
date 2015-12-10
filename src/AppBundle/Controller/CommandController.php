@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,23 +22,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CommandController extends Controller
 {
     /**
-     * @param $name
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("command/{name}", name="Command", requirements={"name" = "\D+"})
+     * @throws EntityNotFoundException
+     *
+     * @Route("command/{id}", name="Command", requirements={"id" = "\d+"})
      */
-    public function CommandAction($name)
+    public function CommandAction($id)
     {
-        $data = Factory::create();
+        $data = $this->getDoctrine()->getRepository('AppBundle:Team')->findOneById($id);
 
-        $team = [];
-
-        for ($i = 1; $i < 11; $i++){
-            $team[$i]['id'] = $i;
-            $team[$i]['name'] = $data->name;
-            $team[$i]['age'] = $data->numberBetween(18, 30);
+        if (!$data) {
+            throw new EntityNotFoundException('Team not found');
         }
 
-        return $this->render("command/index.html.twig", ["name" => $name, "team" => $team]);
+        return $this->render("command/index.html.twig", ["team" => $data]);
     }
 
 }
