@@ -9,26 +9,26 @@
 namespace AppBundle\Controller;
 
 use Doctrine\ORM\EntityNotFoundException;
-use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
- * Class CommandController
+ * Class TeamController
  * @package AppBundle\Controller
  *
  */
-class CommandController extends Controller
+class TeamController extends Controller
 {
     /**
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws EntityNotFoundException
      *
-     * @Route("command/{id}", name="Command", requirements={"id" = "\d+"})
+     * @Route("team/{id}", name="Team", requirements={"id" = "\d+"})
      */
-    public function CommandAction($id)
+    public function TeamAction($id)
     {
         $data = $this->getDoctrine()->getRepository('AppBundle:Team')->findOneById($id);
 
@@ -36,7 +36,7 @@ class CommandController extends Controller
             throw new EntityNotFoundException('Team not found');
         }
 
-        return $this->render("command/index.html.twig", ["team" => $data]);
+        return $this->render("team/index.html.twig", ["team" => $data]);
     }
 
 }

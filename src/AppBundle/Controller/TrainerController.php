@@ -17,13 +17,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TrainerController extends Controller
 {
     /**
-     * @param $name
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("trainer/{name}", name="Trainer", requirements={"name" = "\D+"})
+     * @Route("trainer/{id}", name="Trainer", requirements={"id" = "\d+"})
      */
-    public function TrainerController($name)
+    public function TrainerController($id)
     {
-        return $this->render(":trainer:$name.html.twig");
+        $trainer = $this->getDoctrine()->getRepository('AppBundle:Trainer')->findOneById($id);
+
+        return $this->render(":trainer:index.html.twig", ["trainer" => $trainer]);
     }
 }
