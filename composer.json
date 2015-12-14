@@ -4,8 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/",
-            "Faker\\" : "vendor/fzaninotto/faker/src/autoload.php"
+            "": "src/"
         }
     },
     "require": {
@@ -22,7 +21,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "fzaninotto/faker": "^1.5"
+        "hautelook/alice-bundle": "^1.1"
     },
     "scripts": {
         "post-install-cmd": [

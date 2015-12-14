@@ -16,12 +16,15 @@ gulp.task('less', function () {
 });
 
 gulp.task('js', function(){
-    return gulp.src(['bower_components/jquery/dist/jquery.min.js', 'js/*.js'])
+    return gulp.src([
+        'bower_components/jquery/dist/jquery.min.js',
+        'js/*.js'
+    ])
         .pipe(concat('main.js'))
         .pipe(gulp.dest('../web/js/'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('./assets/build/js'));
+        .pipe(gulp.dest('../web/js/'));
 });
 
 
