@@ -33,4 +33,4 @@ gulp.task('watch', function () {
     gulp.watch(['js/*.js'], ['js']);
 });
 
-gulp.task('default', ['less']);
+gulp.task('default', ['less', 'js']);
