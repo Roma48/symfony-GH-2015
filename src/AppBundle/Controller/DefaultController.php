@@ -4,8 +4,8 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Faker\Factory;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -17,12 +17,24 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $page = $request->query->get('page', 1);
-        $data = $this->getDoctrine()->getRepository('AppBundle:Team')->findAll();
-
-
+        $data = $this->getDoctrine()->getRepository('AppBundle:Team')->getPage();
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', ['teams' => $data]);
+    }
+
+    /**
+     * @Route("/page", name="Page")
+     * @param Request $request
+     * @return Response
+     */
+    public function pageAction(Request $request)
+    {
+        $page = (int)$request->get('page');
+
+        $data = $this->getDoctrine()->getRepository('AppBundle:Team')->getPage($page);
+
+        return $this->render('default/page.html.twig', ['teams' => $data]);
+
     }
 }
