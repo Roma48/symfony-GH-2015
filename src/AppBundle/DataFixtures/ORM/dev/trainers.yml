@@ -1,0 +1,6 @@
+AppBundle\Entity\Trainer:
+    trainer{1..70}:
+            name: <name()>
+            age: <numberBetween(40, 60)>
+            country: <country()>
+            team: @team*

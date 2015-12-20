@@ -1,0 +1,6 @@
+AppBundle\Entity\Player:
+    player{1..230}:
+            name: <name()>
+            age: <numberBetween(18, 30)>
+            country: <country()>
+            team: @team*
