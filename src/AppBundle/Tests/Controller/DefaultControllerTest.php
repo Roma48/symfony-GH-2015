@@ -10,9 +10,9 @@ class CommandControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/command/dynamo');
+        $crawler = $client->request('GET', '/team/1');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Command', $crawler->filter('#welcome h1')->text());
+        $this->assertContains('Team', $crawler->filter('#welcome h1')->text());
     }
 }
