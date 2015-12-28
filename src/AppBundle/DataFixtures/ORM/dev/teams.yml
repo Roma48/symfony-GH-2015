@@ -1,0 +1,4 @@
+AppBundle\Entity\Team:
+    team{1..10}:
+            name: <name()>
+            country: <country()>

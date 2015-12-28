@@ -6572,6 +6572,9 @@ body {
   display: block;
   margin: 20px auto;
 }
+#content .container form input[type="submit"] {
+  margin: 10px 0;
+}
 #footer {
   background: #326295;
   height: 200px;
