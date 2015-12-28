@@ -4,11 +4,13 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TeamType extends AbstractType
+class PlayerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,15 +23,14 @@ class TeamType extends AbstractType
                 'label' => 'Country',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add("players", EntityType::class, [
-                'label' => 'Players',
-                'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\Player'
+            ->add("age", IntegerType::class, [
+                'label' => 'Age',
+                'attr' => ['class' => 'form-control']
             ])
-            ->add("trainers", EntityType::class, [
-                'label' => 'Trainers',
+            ->add("team", EntityType::class, [
                 'attr' => ['class' => 'form-control'],
-                'class' => 'AppBundle\Entity\Trainer'
+                'class' => 'AppBundle\Entity\Team',
+                'choice_label' => 'name'
             ])
         ;
     }
@@ -37,11 +38,11 @@ class TeamType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Team'
+            'data_class' => 'AppBundle\Entity\Player'
         ]);
     }
     public function getName()
     {
-        return 'app_bundle_team_type';
+        return 'player';
     }
 }

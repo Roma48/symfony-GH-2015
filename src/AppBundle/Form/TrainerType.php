@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlayerType extends AbstractType
+class TrainerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -38,11 +38,11 @@ class PlayerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Player'
+            'data_class' => 'AppBundle\Entity\Trainer'
         ]);
     }
     public function getName()
     {
-        return 'player';
+        return 'trainer';
     }
 }
